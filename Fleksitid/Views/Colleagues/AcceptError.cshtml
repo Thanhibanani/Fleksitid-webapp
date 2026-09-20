@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "Ugyldig delingskode";
+}
+
+<h1>Ugyldig delingskode</h1>
+<p class="text-danger">
+    @(ViewBag.Error ?? "Denne delingskoden er ugyldig, utløpt eller allerede brukt.")
+</p>
+
+<a asp-action="Index" class="btn btn-link">&larr; Tilbake til kolleger</a>

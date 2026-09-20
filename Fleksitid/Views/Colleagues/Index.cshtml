@@ -1,0 +1,104 @@
+@model ColleaguesViewModel
+@{
+    ViewData["Title"] = "Kolleger";
+}
+
+<h1>Kolleger</h1>
+
+@if (TempData["Message"] is string message)
+{
+    <div class="alert alert-success">@message</div>
+}
+
+<div class="row g-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Del timene mine</h5>
+                <p class="text-muted">Lag en QR-kode som en kollega kan skanne for å få se timene dine.</p>
+                <form asp-action="CreateShare" method="post" class="mb-3">
+                    <button type="submit" class="btn btn-primary">Lag ny delingskode</button>
+                </form>
+
+                @if (!Model.MyShares.Any())
+                {
+                    <p class="text-muted">Du har ikke delt timene dine med noen ennå.</p>
+                }
+                else
+                {
+                    <table class="table table-sm">
+                        <thead><tr><th>Status</th><th>Delt med</th><th></th></tr></thead>
+                        <tbody>
+                            @foreach (var share in Model.MyShares)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (share.IsActive)
+                                        {
+                                            <span class="badge text-bg-success">Aktiv</span>
+                                        }
+                                        else if (share.IsPending)
+                                        {
+                                            <span class="badge text-bg-warning">Venter</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge text-bg-secondary">Utløpt</span>
+                                        }
+                                    </td>
+                                    <td>@(share.Viewer?.FullName ?? "—")</td>
+                                    <td>
+                                        @if (share.IsPending)
+                                        {
+                                            <a asp-action="ShowShare" asp-route-id="@share.Id" class="btn btn-sm btn-outline-secondary">Vis QR</a>
+                                        }
+                                        @if (share.IsActive || share.IsPending)
+                                        {
+                                            <form asp-action="RevokeShare" method="post" class="d-inline" onsubmit="return confirm('Fjerne denne tilgangen?');">
+                                                <input type="hidden" name="id" value="@share.Id" />
+                                                <button type="submit" class="btn btn-sm btn-outline-danger">Fjern</button>
+                                            </form>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Kolleger som har delt med meg</h5>
+                @if (!Model.SharedWithMe.Any())
+                {
+                    <p class="text-muted">Ingen kolleger har delt timene sine med deg ennå. Be dem lage en delingskode under "Del timene mine".</p>
+                }
+                else
+                {
+                    <table class="table table-sm">
+                        <thead><tr><th>Navn</th><th></th><th></th></tr></thead>
+                        <tbody>
+                            @foreach (var share in Model.SharedWithMe)
+                            {
+                                <tr>
+                                    <td>@share.Owner?.FullName</td>
+                                    <td><a asp-action="ViewColleague" asp-route-ownerId="@share.OwnerId" class="btn btn-sm btn-outline-primary">Se timer</a></td>
+                                    <td>
+                                        <form asp-action="RevokeShare" method="post" class="d-inline" onsubmit="return confirm('Slutte å se timene til denne kollegaen?');">
+                                            <input type="hidden" name="id" value="@share.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger">Fjern</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>

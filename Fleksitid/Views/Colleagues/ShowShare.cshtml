@@ -1,0 +1,17 @@
+@model ColleagueConsent
+@{
+    ViewData["Title"] = "Del timene dine";
+    var acceptUrl = Url.Action("Accept", "Colleagues", new { token = Model.ShareToken }, Context.Request.Scheme);
+}
+
+<h1>Del timene dine</h1>
+<p class="text-muted">La en kollega skanne QR-koden under med mobilen sin, eller send dem lenken. Koden er gyldig i 24 timer.</p>
+
+<div class="card" style="max-width: 400px;">
+    <div class="card-body text-center">
+        <img src="@Url.Action("Qr", "Colleagues", new { token = Model.ShareToken })" alt="QR-kode for deling" class="img-fluid mb-3" />
+        <p class="small text-break">@acceptUrl</p>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-link mt-3">&larr; Tilbake til kolleger</a>

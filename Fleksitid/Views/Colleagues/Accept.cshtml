@@ -1,0 +1,15 @@
+@model ColleagueConsent
+@{
+    ViewData["Title"] = "Godta deling";
+}
+
+<h1>Godta deling</h1>
+<p>
+    <strong>@Model.Owner?.FullName</strong> vil dele timene sine med deg. Vil du godta dette?
+</p>
+
+<form asp-action="Accept" method="post">
+    <input type="hidden" name="token" value="@Model.ShareToken" />
+    <button type="submit" class="btn btn-primary">Godta</button>
+    <a asp-action="Index" class="btn btn-link">Avbryt</a>
+</form>

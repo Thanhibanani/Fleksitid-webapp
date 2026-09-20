@@ -3,6 +3,7 @@ using System;
 using Fleksitid.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Fleksitid.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260920144913_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.6");
@@ -128,7 +131,7 @@ namespace Fleksitid.Data.Migrations
 
                     b.HasIndex("ViewerId");
 
-                    b.ToTable("ColleagueConsents", (string)null);
+                    b.ToTable("ColleagueConsents");
                 });
 
             modelBuilder.Entity("Fleksitid.Models.Organization", b =>
@@ -152,7 +155,7 @@ namespace Fleksitid.Data.Migrations
                     b.HasIndex("OrgCode")
                         .IsUnique();
 
-                    b.ToTable("Organizations", (string)null);
+                    b.ToTable("Organizations");
                 });
 
             modelBuilder.Entity("Fleksitid.Models.SickDay", b =>
@@ -182,7 +185,7 @@ namespace Fleksitid.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SickDays", (string)null);
+                    b.ToTable("SickDays");
                 });
 
             modelBuilder.Entity("Fleksitid.Models.TimeEntry", b =>
@@ -222,7 +225,7 @@ namespace Fleksitid.Data.Migrations
 
                     b.HasIndex("UserId", "Date");
 
-                    b.ToTable("TimeEntries", (string)null);
+                    b.ToTable("TimeEntries");
                 });
 
             modelBuilder.Entity("Fleksitid.Models.WorkContract", b =>
@@ -249,7 +252,7 @@ namespace Fleksitid.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("WorkContracts", (string)null);
+                    b.ToTable("WorkContracts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

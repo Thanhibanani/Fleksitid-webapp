@@ -1,0 +1,54 @@
+@model ColleagueTimeViewModel
+@{
+    ViewData["Title"] = Model.ColleagueName;
+}
+
+<h1>@Model.ColleagueName sine timer</h1>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted">Denne uken</h6>
+                <p class="fs-4 mb-0">@Model.WeekWorkedHours.ToString("0.##") / @Model.WeeklyContractHours.ToString("0.##") t</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-center h-100">
+            <div class="card-body">
+                <h6 class="card-subtitle text-muted">Fleksisaldo</h6>
+                <p class="fs-4 mb-0 @(Model.TotalFlexBalance < 0 ? "text-danger" : "text-success")">
+                    @(Model.TotalFlexBalance >= 0 ? "+" : "")@Model.TotalFlexBalance.ToString("0.##") t
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Siste registreringer</h5>
+        @if (!Model.RecentEntries.Any())
+        {
+            <p class="text-muted">Ingen registreringer ennå.</p>
+        }
+        else
+        {
+            <table class="table table-sm">
+                <thead><tr><th>Dato</th><th>Timer</th></tr></thead>
+                <tbody>
+                    @foreach (var entry in Model.RecentEntries)
+                    {
+                        <tr>
+                            <td>@entry.Date.ToString("dd.MM.yyyy")</td>
+                            <td>@(entry.IsOpen ? "Pågår" : entry.Hours.ToString("0.##") + " t")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-link mt-3">&larr; Tilbake til kolleger</a>
