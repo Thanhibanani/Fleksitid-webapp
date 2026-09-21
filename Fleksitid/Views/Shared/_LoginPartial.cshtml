@@ -1,26 +1,27 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
+<div class="dropdown">
+    <button class="btn btn-link text-dark p-0 border-0" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Konto">
+        <i class="bi bi-person-circle fs-4"></i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-end">
 @if (SignInManager.IsSignedIn(User))
 {
-    <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity?.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
-        </form>
-    </li>
+        <li><h6 class="dropdown-header">Hei, @User.Identity?.Name!</h6></li>
+        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Min konto</a></li>
+        <li><hr class="dropdown-divider" /></li>
+        <li>
+            <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="dropdown-item">Logg ut</button>
+            </form>
+        </li>
 }
 else
 {
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
+        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Logg inn</a></li>
+        <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Registrer deg</a></li>
 }
-</ul>
+    </ul>
+</div>
