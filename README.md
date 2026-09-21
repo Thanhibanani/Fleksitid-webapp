@@ -12,12 +12,13 @@ enkelte selv registrerer egen arbeidstid og sykefravær.
 
 - Innlogging og registrering (ASP.NET Core Identity)
 - Registrere timer manuelt (dato, antall timer, notat)
-- Liste over egne registreringer
+- Liste over egne registreringer, med sletting
+- Stemple inn/ut med en "Start"/"Slutt"-knapp, som alternativ til manuell registrering
 
 ### Planlagt (i denne rekkefølgen)
 
-- Slette registreringer
-- Stemple inn/ut med en "Start"/"Slutt"-knapp, som alternativ til manuell registrering
+- Live klokke/timer på siden mens man er stemplet inn, som viser hvor lenge man
+  har jobbet så langt i dag (oppdateres uten å laste siden på nytt)
 - **Arbeidstid**: fast avtalt arbeidstid per periode (f.eks. timer/uke), slik at en
   virksomhet kan ha ulike perioder som vintertid og sommertid. Jobber man mer enn
   avtalt arbeidstid i en periode, gir det fleksitid.
