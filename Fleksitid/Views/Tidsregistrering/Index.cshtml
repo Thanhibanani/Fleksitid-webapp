@@ -5,6 +5,24 @@
 
 <h1>Min tid</h1>
 
+@{
+    var apenRegistrering = Model.FirstOrDefault(e => e.EndTime == null && e.StartTime != null);
+}
+
+@if (apenRegistrering is not null)
+{
+    <p>Stemplet inn kl. @apenRegistrering.StartTime?.ToShortTimeString()</p>
+    <form asp-action="ClockOut" method="post" class="d-inline">
+        <button type="submit" class="btn btn-danger mb-3">Slutt</button>
+    </form>
+}
+else
+{
+    <form asp-action="ClockIn" method="post" class="d-inline">
+        <button type="submit" class="btn btn-success mb-3">Start</button>
+    </form>
+}
+
 <a asp-action="Create" class="btn btn-primary mb-3">+ Legg til</a>
 
 <table class="table">
@@ -21,7 +39,7 @@
         {
             <tr>
                 <td>@entry.Date.ToShortDateString()</td>
-                <td>@entry.Hours</td>
+                <td>@entry.Hours.ToString("0.00")</td>
                 <td>@entry.Note</td>
                 <td>
                     <form asp-action="Delete" asp-route-id="@entry.Id" method="post" class="d-inline">

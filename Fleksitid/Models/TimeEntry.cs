@@ -11,5 +11,7 @@ namespace Fleksitid.Models
         public decimal Hours { get; set; }
 
         public string? Note { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
     }
 }
