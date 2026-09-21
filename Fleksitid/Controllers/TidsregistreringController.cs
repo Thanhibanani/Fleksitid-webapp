@@ -47,5 +47,61 @@ namespace Fleksitid.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var userId = _userManager.GetUserId(User);
+            var entry = await _db.TimeEntries.FirstOrDefaultAsync(e => e.Id == id && e.UserId == userId);
+
+            if (entry is not null)
+            {
+                _db.TimeEntries.Remove(entry);
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ClockIn()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var alleredeInne = await _db.TimeEntries
+                .AnyAsync(e => e.UserId == userId && e.EndTime == null && e.StartTime != null);
+
+            if (!alleredeInne)
+            {
+                _db.TimeEntries.Add(new TimeEntry
+                {
+                    UserId = userId!,
+                    Date = DateTime.Today,
+                    StartTime = DateTime.Now
+                });
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ClockOut()
+        {
+            var userId = _userManager.GetUserId(User);
+
+            var apenRegistrering = await _db.TimeEntries
+                .Where(e => e.UserId == userId && e.EndTime == null && e.StartTime != null)
+                .FirstOrDefaultAsync();
+
+            if (apenRegistrering is not null)
+            {
+                apenRegistrering.EndTime = DateTime.Now;
+                apenRegistrering.Hours = (decimal)(apenRegistrering.EndTime.Value - apenRegistrering.StartTime!.Value).TotalHours;
+                await _db.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
