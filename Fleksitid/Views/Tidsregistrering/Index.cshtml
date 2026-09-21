@@ -1,0 +1,34 @@
+@model List<TimeEntry>
+@{
+    ViewData["Title"] = "Min tid";
+}
+
+<h1>Min tid</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Legg til</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Dato</th>
+            <th>Timer</th>
+            <th>Notat</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in Model)
+        {
+            <tr>
+                <td>@entry.Date.ToShortDateString()</td>
+                <td>@entry.Hours</td>
+                <td>@entry.Note</td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@entry.Id" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Slett</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
