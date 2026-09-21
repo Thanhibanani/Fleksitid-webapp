@@ -30,5 +30,22 @@ namespace Fleksitid.Controllers
 
             return View(entries);
         }
+
+        public IActionResult Create()
+        {
+            var entry = new TimeEntry { Date = DateTime.Today };
+            return View(entry);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(TimeEntry entry)
+        {
+            entry.UserId = _userManager.GetUserId(User)!;
+
+            _db.TimeEntries.Add(entry);
+            await _db.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
