@@ -1,0 +1,30 @@
+@model List<Arbeidstid>
+@{
+    ViewData["Title"] = "Arbeidstid";
+}
+
+<h1>Arbeidstid</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Ny periode</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Navn</th>
+            <th>Timer/uke</th>
+            <th>Fra</th>
+            <th>Til</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var periode in Model)
+        {
+            <tr>
+                <td>@periode.Navn</td>
+                <td>@periode.TimerPerUke</td>
+                <td>@periode.FraDato.ToShortDateString()</td>
+                <td>@(periode.TilDato?.ToShortDateString() ?? "Inntil videre")</td>
+            </tr>
+        }
+    </tbody>
+</table>

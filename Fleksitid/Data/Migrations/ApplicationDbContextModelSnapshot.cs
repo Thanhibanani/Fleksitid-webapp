@@ -17,6 +17,34 @@ namespace Fleksitid.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.12");
 
+            modelBuilder.Entity("Fleksitid.Models.Arbeidstid", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("FraDato")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Navn")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("TilDato")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TimerPerUke")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Arbeidstider");
+                });
+
             modelBuilder.Entity("Fleksitid.Models.TimeEntry", b =>
                 {
                     b.Property<int>("Id")

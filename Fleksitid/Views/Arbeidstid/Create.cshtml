@@ -1,0 +1,22 @@
+@model Arbeidstid
+@{
+    ViewData["Title"] = "Ny arbeidstid-periode";
+}
+
+<h1>Ny arbeidstid-periode</h1>
+
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Navn" class="form-label"></label>
+        <input asp-for="Navn" class="form-control" placeholder="F.eks. Sommertid" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="TimerPerUke" class="form-label"></label>
+        <input asp-for="TimerPerUke" class="form-control" type="number" step="0.5" min="0" max="60" />
+    </div>
+    <div class="mb-3">
+        <label asp-for="FraDato" class="form-label"></label>
+        <input asp-for="FraDato" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Lagre</button>
+</form>
