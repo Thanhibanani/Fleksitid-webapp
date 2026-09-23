@@ -1,5 +1,9 @@
 # Fleksitid
 
+![.NET](https://img.shields.io/badge/.NET_10-512BD4?logo=dotnet&logoColor=white) ![C#](https://img.shields.io/badge/C%23-239120?logo=csharp&logoColor=white) ![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core_MVC-512BD4?logo=dotnet&logoColor=white) ![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white) ![Bootstrap](https://img.shields.io/badge/Bootstrap_5-7952B3?logo=bootstrap&logoColor=white) ![Status](https://img.shields.io/badge/status-under_utvikling-orange)
+
+> Videreutvikling av den første, lette [Fleksitid](https://github.com/Thanhibanani/Fleksitid)-appen (ren HTML/CSS/JS). Utviklingslogg dag for dag ligger i [CHANGELOG.md](CHANGELOG.md).
+
 ## Mål
 
 Fleksitid skal være et digitalt verktøy for å registrere og følge opp fleksitid i en
@@ -34,6 +38,17 @@ enkelte selv registrerer egen arbeidstid og sykefravær.
 - SQLite (utvikling)
 - ASP.NET Core Identity (innlogging og roller)
 - Bootstrap 5 (UI, med egen theming via CSS-variabler)
+
+## Kom i gang
+
+```bash
+git clone https://github.com/Thanhibanani/Fleksitid-webapp.git
+cd Fleksitid-webapp/Fleksitid
+dotnet ef database update   # oppretter SQLite-databasen
+dotnet run
+```
+
+Krever [.NET 10 SDK](https://dotnet.microsoft.com/download) og `dotnet-ef` (`dotnet tool install --global dotnet-ef`).
 
 ## Status
 
