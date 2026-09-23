@@ -15,19 +15,21 @@
   --bs-font-monospace: 'DM Mono', monospace;
   --bs-body-font-family: var(--bs-font-sans-serif);
 
-  /* Warm off-white palette, matching the original static prototype. */
-  --bs-body-bg: #f5f4f0;
-  --bs-body-color: #1a1917;
-  --bs-border-color: #e2e0d8;
-  --bs-secondary-color: #6b6960;
+  /* Modern minimalist palette: soft cream/beige neutrals, warmed up with
+     a single coral accent. */
+  --bs-body-bg: #faf6f0;
+  --bs-body-color: #2b2620;
+  --bs-border-color: #e8ddce;
+  --bs-secondary-color: #8a7f70;
 
   /* --bs-primary drives .btn-primary, links, focus rings, etc. */
-  --bs-primary: #2d5a3d;
-  --bs-primary-rgb: 45, 90, 61;
+  --bs-primary: #ff6f59;
+  --bs-primary-rgb: 255, 111, 89;
 
-  /* --bs-danger drives delete/error states (.btn-danger, .text-danger). */
-  --bs-danger: #8b2635;
-  --bs-danger-rgb: 139, 38, 53;
+  /* --bs-danger drives delete/error states (.btn-danger, .text-danger) —
+     kept distinct from the coral accent so delete buttons don't blend in. */
+  --bs-danger: #d64545;
+  --bs-danger-rgb: 214, 69, 69;
 
   --bs-border-radius: 10px;
 }

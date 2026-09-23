@@ -2,6 +2,33 @@
 
 Logg over hva som har skjedd underveis i prosjektet, dag for dag.
 
+## 2026-09-23 — Frontend-finpuss + fjernet CSS-konflikter
+
+- Fjernet en `cd fleksi`-terminaltekst som ved et uhell havnet midt i
+  `Tidsregistrering/Index.cshtml` sin tabell i en tidligere commit.
+- Gjorde skjemaene (`Tidsregistrering/Create.cshtml`,
+  `Arbeidstid/Create.cshtml`) om fra vertikalt stablede felt til en kort,
+  horisontal rad (`row row-cols-auto g-2 align-items-end`).
+- Forbedret vertikal justering av navbar-ikonene (hus-ikon, kollega-lenker,
+  konto-ikon) med `d-flex align-items-center`.
+- Ny fargepalett — moderne minimalistisk: krem/beige nøytraler
+  (`--bs-body-bg: #faf6f0`) varmet opp med én korall-aksent
+  (`--bs-primary: #ff6f59`), satt via `fleksi.css` sine
+  Bootstrap-variabel-overstyringer.
+- **Fant og fjernet CSS som aktivt motarbeidet theming-oppsettet vårt:**
+  scaffoldens auto-genererte `_Layout.cshtml.css` (kompileres til
+  `Fleksitid.styles.css`) hardkodet en blå fargepalett rett på
+  `.btn-primary`, lenker og border-klasser — disse vant over
+  `fleksi.css` sine variabler i CSS-cascaden, så knappene ville vist blått
+  uansett hva vi satte i temaet. Ryddet bort alt ubrukt/hardkodet
+  (`.btn-primary`, lenkefarge, `.nav-pills`, `.border-top/-bottom`,
+  `.box-shadow`, `.accept-policy` — ingen av disse var faktisk i bruk i
+  noen view) og beholdt bare det som fortsatt trengs (navbar-brand-wrapping,
+  sticky footer). Samme opprydding i `site.css` (fjernet en hardkodet blå
+  fokus-ring og ubrukt `.form-floating`-styling).
+- Verifisert ved å hente ut den faktiske kompilerte CSS-en fra en kjørende
+  instans og bekrefte at korall-fargen vinner nå, ikke den gamle blåe.
+
 ## 2026-09-20 — Oppstart
 
 - Bestemte oss for å bygge Fleksitid fra en ren scaffold (`master`-branchen),
